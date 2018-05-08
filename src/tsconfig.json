@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+        "strict": false,
+        "stripInternal": false,
+        "strictPropertyInitialization": false,
+        "outFile": "../build/game.js",
+        "target": "es2015",
+        "module": "none",
+        "alwaysStrict": true,
+        "allowJs": true,
+        "removeComments": true,
+        "sourceMap": true,
+        "noImplicitReturns": true
+    },
+    "types":["pixi"],
+    "files": [
+        "app.ts"
+    ]
+}
