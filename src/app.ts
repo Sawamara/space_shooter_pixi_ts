@@ -1,8 +1,21 @@
-///<reference path="shootermenu.ts" />
 
-var menu: ShooterMenu;
-var game = new PIXI.Application(800,600);
-var splashArtShownYet = false;
+import * as PIXI from 'pixi.js';
+import {ShooterMenu} from './shootermenu';
+
+const game = new PIXI.Application(800,600);
+
+interface IGameBundle extends Window
+{
+    splashArtShownYet: boolean;
+    game: PIXI.Application;
+    menu: ShooterMenu;
+}
+
+const bundle = window as IGameBundle;
+
+bundle.splashArtShownYet = false;
+bundle.game = game;
+bundle.menu = undefined;
 
 document.body.appendChild(game.view);
 
@@ -22,7 +35,7 @@ game.loader
 
 game.loader.load(function()
 {
-    var loading = document.getElementById('loading'); 
+    const loading = document.getElementById('loading');
     loading.classList.add('hidden');
-    menu = new ShooterMenu(game);
+    const menu = new ShooterMenu(game);
 });

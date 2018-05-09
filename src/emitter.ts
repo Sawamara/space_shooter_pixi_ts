@@ -1,19 +1,20 @@
-function PickOne(names: string[]):string{
-    return names[Math.floor(Math.random()*names.length)];
-}
-
-class Emitter
+export class Emitter
 {
-    counter: number;
-    particles: PIXI.Container
-    UpdateParticleByDirection: (particle:PIXI.DisplayObject)=>void;
+    public static PickOne(names: string[]): string
+    {
+        return names[Math.floor(Math.random()*names.length)];
+    }
 
-    constructor(private poolsize: number,private particleDirection:string, private container: PIXI.Container,assetNames:string[])
+    public counter: number;
+    public particles: PIXI.Container;
+    public UpdateParticleByDirection: (particle: PIXI.DisplayObject)=>void;
+
+    constructor(private poolsize: number,private particleDirection: string, private container: PIXI.Container,assetNames: string[])
     {
         this.particles = new PIXI.Container();
-        for (var i = 0; i<poolsize;i++)
+        for (let i = 0; i<poolsize;i++)
         {
-            var particle = PIXI.Sprite.fromImage(PickOne(assetNames));
+            const particle = PIXI.Sprite.fromImage(Emitter.PickOne(assetNames));
             particle.visible = false;
             this.particles.addChild(particle);
         }
@@ -23,37 +24,41 @@ class Emitter
         switch (particleDirection)
         {
             case "left": {
-                this.UpdateParticleByDirection = function(particle:PIXI.DisplayObject){
+                this.UpdateParticleByDirection = function(particle: PIXI.DisplayObject){
                     particle.x -= 1.50;
-                }
-            } break;
-            
+                };
+                break;
+            }
+
             case "right": {
-                this.UpdateParticleByDirection = function(particle:PIXI.DisplayObject){
+                this.UpdateParticleByDirection = function(particle: PIXI.DisplayObject){
                     particle.x += 0.33;
-                }
-            } break;
+                };
+                break;
+            }
 
             case "up": {
-                this.UpdateParticleByDirection = function(particle:PIXI.DisplayObject){
+                this.UpdateParticleByDirection = function(particle: PIXI.DisplayObject){
                     particle.y -= 0.33;
-                }
-            } break;
+                };
+                break;
+            }
 
             case "down":{
-                this.UpdateParticleByDirection = function(particle:PIXI.DisplayObject){
+                this.UpdateParticleByDirection = function(particle: PIXI.DisplayObject){
                     particle.y += 0.33;
-                }
+                };
+                break;
             }
         }
     }
 
-    Update = ()=>
-    {        
-        for (let piece of this.particles.children)
+    public Update = ()=>
+    {
+        for (const piece of this.particles.children)
         {
             if (!piece.visible){ continue; }
-            else{
+            else {
                 piece.alpha -= 0.033;
                 this.UpdateParticleByDirection(piece);
 
@@ -66,24 +71,21 @@ class Emitter
         }
     }
 
-    Emit = (originX:number,originY: number)=>{
-            var particle = this.particles.getChildAt(this.counter) as PIXI.Sprite;
+    public Emit = (originX: number,originY: number)=>{
+            const particle = this.particles.getChildAt(this.counter) as PIXI.Sprite;
             particle.position.set(originX,originY);
             particle.visible = true;
             particle.scale.set(1.0+Math.random()*0.45);
             this.counter++;
             if (this.counter >= this.poolsize-1){
                 this.counter = 0;
-                
             }
     }
 
-
-
-    Clear = ()=>{
-        for (let particle of this.particles.children)
+    public Clear = ()=>{
+        for (const particle of this.particles.children)
         {
-            particle.visible = false; 
+            particle.visible = false;
             particle.alpha = 1.0;
         }
     }

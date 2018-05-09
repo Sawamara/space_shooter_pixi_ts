@@ -1,0 +1,34 @@
+{
+  "name": "shooter_pixi_ts",
+  "version": "1.0.0",
+  "description": "example task",
+  "main": "index.html",
+  "scripts": {
+    "build": "webpack",
+    "start": "http-server -p 8080 -c-1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sawamara/space_shooter_pixi_ts.git"
+  },
+  "keywords": [
+    "pixi",
+    "ts"
+  ],
+  "author": "Velansits Arnold",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sawamara/space_shooter_pixi_ts/issues"
+  },
+  "homepage": "https://github.com/Sawamara/space_shooter_pixi_ts#readme",
+  "devDependencies": {
+    "@types/pixi.js": "^4.7.3",
+    "http-server": "^0.11.1",
+    "pixi.js": "^4.7.3",
+    "ts-loader": "^4.3.0",
+    "tslint": "^5.10.0",
+    "tslint-loader": "^3.6.0",
+    "typescript": "^2.8.3",
+    "webpack": "^4.8.1"
+  }
+}
